@@ -17,70 +17,104 @@ public class Main
         {
             System.out.println("Menu");
             System.out.println("1. Opret ny kontakt");
-            System.out.println("2. Se telefonlisten");
+            System.out.println("2. Søg på person");
+            System.out.println("3. Se telefonlisten");
+            System.out.println("4. Slet kontakt");
+            System.out.println("5. Check om en person er på listen?");
+            System.out.println("6. Vis alle navne på listen");
             System.out.println("Exit");
 
-            int choice = scanner.nextInt();
-            scanner.nextLine();
+            String input = scanner.nextLine();
 
-            switch (choice)
+            int choice;
+
+            try
             {
-
-                    case 1:
-
-                        //Options and input
-
-                        System.out.println("Enter name of person");
-                        String name = scanner.nextLine();
-
-                        System.out.println("enter phonenumber");
-                        Integer number = scanner.nextInt();
-
-                        //Add to teleLIst
-                        teleListe.addContact(name, number);
-                        System.out.println("\nContact added succesfully");
-
-                        System.out.println(teleListe);
-
-
-
-
-
-                        break;
-
-
-                    case 2:
-
-
-
-
-                        break;
-
-
-
-                    case 3:
-
-                        break;
-
-
-                    case 4:
-                        // Exit the program
-                        System.out.println("Exiting...");
-                        running = false;
-                        break;
-
-                    default:
-                        System.out.println("Invalid option. Please try again.\n");
-                        break;
-            }
-
+                choice = Integer.parseInt(input);
+            } catch (NumberFormatException e)
+            {
+                System.out.println("Invalid number, please write a number");
+                continue;
         }
 
 
+            switch (choice)
+            {
+                case 1:
+
+                    //Options and input
+
+                    System.out.println("Enter name of person: ");
+                    String name = scanner.nextLine();
+
+                    System.out.println("Enter phonenumber: ");
+                    String number = scanner.nextLine();
+
+                    //Add to teleLIst
+                    teleListe.addContact(name.trim(), number);
+                    System.out.println("\nContact added succesfully");
+                    System.out.println(teleListe);
+
+
+                    break;
+                case 2:
+                    System.out.println("Søg på navn");
+                    String searchName = scanner.nextLine();
+
+
+                    teleListe.getNumber(searchName);
+                    System.out.println("Phone number of " + searchName + " is " + teleListe.getNumber(searchName));
+
+
+                    break;
+
+                case 3:
+
+                    System.out.println(teleListe);
+                    break;
+
+
+                case 4:
+
+                    System.out.println("Who would you like to delete?");
+                    String contactName = scanner.nextLine();
+
+                    teleListe.deleteContact(contactName);
+                    System.out.println("\n" + contactName + " has been deleted. Here is a updated list:");
+
+                    System.out.println(teleListe);
+                    break;
+
+                case 5:
+                    System.out.println("Who would you like to check? ");
+                    String nameOfPerson = scanner.nextLine();
+
+                    teleListe.findContact(nameOfPerson);
+
+
+                    break;
+
+                case 6:
+
+                    System.out.println(teleListe.showNames());
+                    break;
 
 
 
 
+                case 7:
+                    // Exit the program
+                    System.out.println("Exiting...");
+                    running = false;
+                    break;
+
+                default:
+                    System.out.println("Invalid option. Please try again.\n");
+                    break;
+            }
+
+        }
+        
 
 
     }
