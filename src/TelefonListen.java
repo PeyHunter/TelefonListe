@@ -1,4 +1,6 @@
+import java.io.*;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 public class TelefonListen
@@ -57,27 +59,33 @@ public class TelefonListen
     {
         if (name != null && !name.isEmpty())
         {
-
+            String formattedName = capitalizeFirstAndLastName(name.trim());
             boolean contactDeleted = false;
-            for (Map.Entry<String, String> entry : telefonList.entrySet())
+
+            Iterator<Map.Entry<String, String>> iterator = telefonList.entrySet().iterator();
+            while(iterator.hasNext())
             {
-                String formattedName = capitalizeFirstAndLastName(name.trim());
+                Map.Entry<String, String> entry = iterator.next();
                 String fullName = entry.getKey();
+
                 if (fullName.toLowerCase().contains(formattedName.toLowerCase()))
                 {
-                    telefonList.remove(fullName);
+                   iterator.remove();
                     contactDeleted = true;
                     break;
                 }
             }
+             
 
             if (!contactDeleted)
             {
                 System.out.println("No such person is found for deletion");
             } else
             {
-                System.out.println("No such person is in the list");
+                System.out.println(formattedName + " has been deleted");
+                saveToFile("TelefonFile.txt");
             }
+
         }
     }
 
@@ -140,6 +148,61 @@ public class TelefonListen
             }
             return "Contact not found.";
         }
+
+
+
+
+
+        public void loadContactFromFile(String filename)
+        {
+            if (!filename.endsWith(".txt"))
+            {
+                filename +=".txt";
+            }
+
+                try(BufferedReader reader = new BufferedReader(new FileReader(filename)))
+                {
+                    String line;
+                    while ((line = reader.readLine()) != null)
+                    {
+                        String[] parts = line.split(", ");
+                        if (parts.length == 2 )
+                        {
+                            String name = parts[0].replace("Name: ", "").trim();
+                            String number = parts[1].replace("Number:", "").trim();
+                            telefonList.put(name, number);
+                        }
+                    }
+                }catch(IOException e)
+                {
+                    System.out.println("Error " + e.getMessage());
+                }
+        }
+
+
+        public void saveToFile(String filename)
+        {
+            if(!filename.endsWith(".txt"))
+            {
+                filename += ".txt";
+            }
+
+
+            try(BufferedWriter writer = new BufferedWriter(new FileWriter(filename)))
+            {
+                for (Map.Entry<String, String> entry : telefonList.entrySet())
+                {
+                    String line = "Name: " + entry.getKey() + ", Number: " + entry.getValue();
+                    writer.write(line);
+                    writer.newLine();
+                }
+            }
+                catch (IOException e)
+                {
+                    System.out.println("Error" + e.getMessage());
+                }
+        }
+
 
 
         @Override

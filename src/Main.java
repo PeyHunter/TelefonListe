@@ -1,5 +1,6 @@
 import java.util.Scanner;
 
+
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main
@@ -8,8 +9,9 @@ public class Main
     {
 
         TelefonListen teleListe = new TelefonListen();
-
         Scanner scanner = new Scanner(System.in);
+
+        teleListe.loadContactFromFile("TelefonFile.txt");
 
         boolean running = true;
 
@@ -22,6 +24,7 @@ public class Main
             System.out.println("4. Slet kontakt");
             System.out.println("5. Check om en person er på listen?");
             System.out.println("6. Vis alle navne på listen");
+            System.out.println("7. Gem kontakter i fil");
             System.out.println("Exit");
 
             String input = scanner.nextLine();
@@ -55,6 +58,7 @@ public class Main
                     System.out.println("\nContact added succesfully");
                     System.out.println(teleListe);
 
+                    teleListe.saveToFile("TelefonFile.txt");
 
                     break;
                 case 2:
@@ -99,10 +103,19 @@ public class Main
                     System.out.println(teleListe.showNames());
                     break;
 
-
-
-
                 case 7:
+
+                    System.out.println("Enter the filename you wish");
+                    String filename = scanner.nextLine();
+                    teleListe.saveToFile(filename);
+
+                    break;
+
+
+
+
+
+                case 8:
                     // Exit the program
                     System.out.println("Exiting...");
                     running = false;
@@ -114,7 +127,8 @@ public class Main
             }
 
         }
-        
+
+
 
 
     }
