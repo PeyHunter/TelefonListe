@@ -29,6 +29,14 @@ public class TelefonListen
         telefonList.put(formattedName, number);
     }
 
+// man kunne bare skrive: telefonListe.containsKey(formattedName);
+    public void findContainsContact(String name)
+    {
+         String formattedName = capitalizeFirstAndLastName(name.trim());
+        telefonList.containsKey(formattedName);
+
+    }
+
     public void findContact(String name)
     {
         String formattedName = capitalizeFirstAndLastName(name.trim());
@@ -52,6 +60,11 @@ public class TelefonListen
             System.out.println("No, this person is not on the contact list" + "\n");
         }
     }
+
+
+
+
+
 
 
 /////

@@ -17,6 +17,7 @@ public class Main
 
         while (running)
         {
+            System.out.println("Peytons Telefon Liste");
             System.out.println("Menu");
             System.out.println("1. Opret ny kontakt");
             System.out.println("2. Søg på person");
@@ -53,7 +54,7 @@ public class Main
                     System.out.println("Enter phonenumber: ");
                     String number = scanner.nextLine();
 
-                    //Add to teleLIst
+                    //Add to teleList
                     teleListe.addContact(name.trim(), number);
                     System.out.println("\nContact added succesfully");
                     System.out.println(teleListe);
@@ -93,7 +94,8 @@ public class Main
                     System.out.println("Who would you like to check? ");
                     String nameOfPerson = scanner.nextLine();
 
-                    teleListe.findContact(nameOfPerson);
+                    teleListe.findContainsContact(nameOfPerson);
+                    //teleListe.findContact(nameOfPerson);
 
 
                     break;

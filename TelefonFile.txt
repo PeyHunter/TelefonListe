@@ -1,8 +1,10 @@
 Name: Isabel, Number: +45 2637 8272
 Name: Javier, Number: +52 928 37 9283
-Name: Peyton, Number: +45 0292 0293
+Name: Joe Albrektsen, Number: +45 2938 0293
+Name: Peyton, Number: +45 2837 8273
 Name: Anders, Number: +45 8273 9212
 Name: Isabella, Number: +45 2837 8271
+Name: Nauar, Number: +45 2938 8287
 Name: Peter, Number: +45 9283 0338
 Name: Benjamin, Number: +45 2938 9238
 Name: Karen, Number: +45 9283 9182
